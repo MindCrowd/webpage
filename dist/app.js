@@ -54,7 +54,6 @@
   document.title = `${config.project.name} — Crowd Simulation for Unity`;
   $("#name-status").textContent = config.project.isPlaceholder ? "Final project name to be added." : config.project.fullTitle;
   $("#team-id").textContent = config.project.teamId || "To be assigned";
-  $("#team-count").textContent = config.team.length;
   if (config.project.lastUpdated) $("#updated-date").textContent = `Last updated ${dateLabel(config.project.lastUpdated)}`;
   if (safeUrl(websiteUrl)) {
     $("#website-link").textContent = websiteUrl;
