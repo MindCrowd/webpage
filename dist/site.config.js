@@ -2,11 +2,11 @@
 // Use an empty string "" for a link or detail that is not ready yet.
 window.PROJECT_CONFIG = {
   project: {
-    name: "Project Name",
-    shortName: "Project Name",
-    isPlaceholder: true,
-    pronunciation: "", // Written pronunciation of the PROJECT name only
-    spokenName: "", // Optional spelling for browser speech of the project name
+    name: "MINDCROWD",
+    shortName: "MINDCROWD",
+    isPlaceholder: false,
+    pronunciation: "MIND crowd", // Written pronunciation of the PROJECT name only
+    spokenName: "Mind Crowd", // Optional spelling for browser speech of the project name
     pronunciationLanguage: "en-US", // Change if your project name uses another language
     pronunciationAudio: "", // Optional recording, e.g. "assets/project-name.mp3"
     fullTitle: "Behavior-Aware Crowd Simulation and Management Plugin for Unity",
@@ -25,7 +25,7 @@ window.PROJECT_CONFIG = {
   },
   repositories: [
     {
-      name: "Crowd simulation plugin",
+      name: "MINDCROWD plugin",
       tag: "MAIN REPOSITORY",
       description: "The reusable Unity package: agent behavior, navigation, resource management, and developer tools.",
       url: "", // Add your main/plugin GitHub repository URL here

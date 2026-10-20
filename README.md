@@ -1,6 +1,6 @@
-# Crowd simulation project website
+# MINDCROWD project website
 
-A responsive project website prepared for **GitHub Pages**. The editable placeholder **Project Name** is intentional. All site files are in `dist/`; there are no dependencies, installation steps, or build steps.
+A responsive website for **MINDCROWD**, the behavior-aware crowd simulation and management project for Unity, deployed with **GitHub Pages**. All site files are in `dist/`; there are no dependencies, installation steps, or build steps.
 
 **Live website:** https://bilkentsenior.github.io/webpage/  
 **Source repository:** https://github.com/bilkentsenior/webpage
@@ -11,7 +11,7 @@ The website repository is public and GitHub Pages is configured to deploy throug
 
 Open **`dist/site.config.js`**. This is the main place to update:
 
-- Project name and short name; set `isPlaceholder` to `false` when the name is final.
+- Project name and short name. **MINDCROWD** is configured as the final project name (`isPlaceholder: false`).
 - Project-name pronunciation: set `project.pronunciation` to the written pronunciation. Optionally set `spokenName` and `pronunciationLanguage` for browser speech, or add a recording and set `pronunciationAudio` (for example, `assets/project-name.mp3`). The listening button appears only for a final project name with configured pronunciation and supported audio. Team member names have no pronunciation controls.
 - Team ID, optional website URL override, contact email, and last updated date. The live URL is detected automatically on GitHub Pages.
 - Main/plugin repository URL. The known `bilkentsenior/CrowdSandbox-Unity` repository is already linked separately.
@@ -87,7 +87,7 @@ All site files and PDFs use relative paths. Leave `project.websiteUrl` empty for
 
 - The supplied unofficial project description is used as background information for the page and is not published as a report.
 - The supplied 9 October 2026 meeting minutes are copied unchanged to `dist/documents/meeting-minutes-01-2026-10-09.pdf`.
-- Team names and academic guidance come from the supplied meeting minutes. The overview reflects the team's selected feature list: simulation environments, resource points and pathfinding, emotions, perception, debug tools, and group behavior. Individual technical roles, final project name, team ID, and unknown URLs have not been invented.
+- Team names and academic guidance come from the supplied meeting minutes. **MINDCROWD** is the project name selected by the team. The overview reflects the team's selected feature list: simulation environments, resource points and pathfinding, emotions, perception, debug tools, and group behavior. Individual technical roles, team ID, and unknown URLs have not been invented.
 - The original meeting minutes PDF remains unchanged. The website uses an editable name independently.
 - The described features and evaluation are presented as planned work. The moving diagram is clearly labeled as an illustration, not a running Unity implementation or a measured result.
 - The meeting template's submission/email instructions are source-document content, not actions performed by the website.
