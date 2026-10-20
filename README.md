@@ -12,6 +12,7 @@ The website repository is public and GitHub Pages is configured to deploy throug
 Open **`dist/site.config.js`**. This is the main place to update:
 
 - Project name and short name; set `isPlaceholder` to `false` when the name is final.
+- Project-name pronunciation: set `project.pronunciation` to the written pronunciation. Optionally set `spokenName` and `pronunciationLanguage` for browser speech, or add a recording and set `pronunciationAudio` (for example, `assets/project-name.mp3`). The listening button appears only for a final project name with configured pronunciation and supported audio. Team member names have no pronunciation controls.
 - Team ID, optional website URL override, contact email, and last updated date. The live URL is detected automatically on GitHub Pages.
 - Main/plugin repository URL. The known `bilkentsenior/CrowdSandbox-Unity` repository is already linked separately.
 - Team names, student IDs, roles, emails, optional GitHub profiles, and optional photographs.

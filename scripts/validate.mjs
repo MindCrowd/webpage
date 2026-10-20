@@ -42,6 +42,7 @@ for (const doc of config.documents) {
 for (const member of config.team) { await checkUrl(member.github); await checkUrl(member.photo); }
 for (const advisor of config.advisors) await checkUrl(advisor.url);
 await checkUrl(config.project.websiteUrl);
+await checkUrl(config.project.pronunciationAudio);
 await checkUrl(config.demo.url);
 new vm.Script(await readFile(resolve(root,"app.js"),"utf8"));
 if (errors.length) { console.error(errors.join("\n")); process.exitCode=1; }

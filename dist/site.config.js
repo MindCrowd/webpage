@@ -5,6 +5,10 @@ window.PROJECT_CONFIG = {
     name: "Project Name",
     shortName: "Project Name",
     isPlaceholder: true,
+    pronunciation: "", // Written pronunciation of the PROJECT name only
+    spokenName: "", // Optional spelling for browser speech of the project name
+    pronunciationLanguage: "en-US", // Change if your project name uses another language
+    pronunciationAudio: "", // Optional recording, e.g. "assets/project-name.mp3"
     fullTitle: "Behavior-Aware Crowd Simulation and Management Plugin for Unity",
     university: "Bilkent University",
     department: "Computer Engineering",

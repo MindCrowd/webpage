@@ -73,6 +73,50 @@
     contact.hidden = false;
   }
 
+  // Pronunciation belongs to the project identity, never to team members.
+  const pronunciationText = $("#project-pronunciation-text");
+  const pronunciationButton = $("#project-pronunciation-button");
+  const pronunciationStatus = $("#project-pronunciation-status");
+  const projectAudioUrl = safeUrl(config.project.pronunciationAudio);
+  const projectNameIsFinal = !config.project.isPlaceholder && Boolean(config.project.name?.trim());
+  if (projectNameIsFinal && config.project.pronunciation) pronunciationText.textContent = config.project.pronunciation;
+  else if (projectNameIsFinal && config.project.spokenName) pronunciationText.textContent = config.project.spokenName;
+  else if (projectNameIsFinal && projectAudioUrl) pronunciationText.textContent = "Listen to the project name below.";
+  else if (projectNameIsFinal) pronunciationText.textContent = "Project name pronunciation to be added.";
+  const hasProjectPronunciation = config.project.pronunciation || config.project.spokenName || projectAudioUrl;
+  if (projectNameIsFinal && hasProjectPronunciation && (projectAudioUrl || "speechSynthesis" in window)) {
+    pronunciationButton.hidden = false;
+    pronunciationButton.setAttribute("aria-label", `Hear pronunciation of ${config.project.name}`);
+    let projectAudio;
+    const pronunciationFailed = () => {
+      pronunciationStatus.classList.remove("sr-only");
+      pronunciationStatus.textContent = "Audio is unavailable. Please use the written pronunciation above.";
+    };
+    pronunciationButton.addEventListener("click", async () => {
+      pronunciationStatus.classList.add("sr-only");
+      pronunciationStatus.textContent = `Playing the pronunciation of ${config.project.name}.`;
+      try {
+        if (projectAudioUrl) {
+          if (!projectAudio) {
+            projectAudio = new Audio(projectAudioUrl);
+            projectAudio.addEventListener("error", pronunciationFailed);
+          }
+          projectAudio.currentTime = 0;
+          await projectAudio.play();
+        } else {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(config.project.spokenName || config.project.name);
+          utterance.lang = config.project.pronunciationLanguage || "en-US";
+          utterance.rate = 0.85;
+          utterance.onerror = (event) => {
+            if (!["canceled", "interrupted"].includes(event.error)) pronunciationFailed();
+          };
+          window.speechSynthesis.speak(utterance);
+        }
+      } catch (_) { pronunciationFailed(); }
+    });
+  }
+
   config.team.forEach((member, index) => {
     const article = create("article", "team-member");
     const portrait = create("div", "member-portrait");
