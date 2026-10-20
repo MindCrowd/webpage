@@ -12,7 +12,6 @@ The website repository is public and GitHub Pages is configured to deploy throug
 Open **`dist/site.config.js`**. This is the main place to update:
 
 - Project name and short name; set `isPlaceholder` to `false` when the name is final.
-- Pronunciation text, optional spoken spelling, or a recording such as `assets/project-name.mp3`. The listening button appears once a final name and pronunciation are configured and browser audio is supported.
 - Team ID, optional website URL override, contact email, and last updated date. The live URL is detected automatically on GitHub Pages.
 - Main/plugin repository URL. The known `bilkentsenior/CrowdSandbox-Unity` repository is already linked separately.
 - Team names, roles, emails, optional GitHub profiles, and optional photographs.
@@ -20,7 +19,7 @@ Open **`dist/site.config.js`**. This is the main place to update:
 
 Leave an unknown URL as `""`. The page will show an unavailable status instead of a broken button. No changes made in a browser are saved; edit and commit the source file to update the published site.
 
-Edit `dist/index.html` for the main project description and sections, and `dist/styles.css` for colors and layout. The pronunciation placeholder is deliberately unspoken until the name is chosen.
+Edit `dist/index.html` for the main project description and sections, and `dist/styles.css` for colors and layout.
 
 ### Add another document or meeting
 
@@ -57,7 +56,7 @@ Check local files, PDF signatures, script syntax, and anchors:
 npm run check
 ```
 
-You can also open `dist/index.html` directly in a browser. A local HTTP server is preferable for previewing audio and matching hosted behavior.
+You can also open `dist/index.html` directly in a browser. A local HTTP server is preferable for matching hosted behavior.
 
 ## Deploy on GitHub Pages
 
@@ -101,7 +100,7 @@ dist/
   styles.css                 Responsive design
   app.js                     Archive, team rendering, and illustration
   site.config.js             Editable project data and links
-  assets/favicon.svg         Local icon (add photos/audio here)
+  assets/favicon.svg         Local icon (add photos here)
   documents/                 Included and future project files
 scripts/serve.mjs             Local static preview
 scripts/validate.mjs          Local file and link validation

@@ -73,32 +73,6 @@
     contact.hidden = false;
   }
 
-  const pronunciation = $("#pronounce-button");
-  const audioUrl = safeUrl(config.project.pronunciationAudio);
-  if (config.project.pronunciation) $("#pronunciation-text").textContent = config.project.pronunciation;
-  if (!config.project.isPlaceholder && (audioUrl || config.project.pronunciation || config.project.spokenName)) {
-    pronunciation.hidden = !(audioUrl || "speechSynthesis" in window);
-    let nameAudio;
-    pronunciation.addEventListener("click", async () => {
-      try {
-        if (audioUrl) {
-          nameAudio ||= new Audio(audioUrl);
-          nameAudio.currentTime = 0;
-          await nameAudio.play();
-        } else {
-          window.speechSynthesis.cancel();
-          const utterance = new SpeechSynthesisUtterance(config.project.spokenName || config.project.name);
-          utterance.lang = "en-US";
-          utterance.rate = 0.85;
-          window.speechSynthesis.speak(utterance);
-        }
-        $("#speech-status").textContent = `Playing pronunciation of ${config.project.name}.`;
-      } catch (_) {
-        $("#speech-status").textContent = "Audio could not play. The written pronunciation is shown above.";
-      }
-    });
-  }
-
   config.team.forEach((member, index) => {
     const article = create("article", "team-member");
     const portrait = create("div", "member-portrait");

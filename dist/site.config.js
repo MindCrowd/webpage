@@ -11,9 +11,6 @@ window.PROJECT_CONFIG = {
     course: "CS491/492 · Senior Design Project",
     teamId: "", // e.g. "T26xx"
     year: "2026",
-    pronunciation: "", // e.g. "KROW-doh" once you choose your name
-    spokenName: "", // Optional spelling for browser speech
-    pronunciationAudio: "", // Optional: "assets/project-name.mp3"
     websiteUrl: "", // Detected automatically on GitHub Pages; optional custom URL override
     contactEmail: "", // Optional team contact address
     lastUpdated: "2026-10-20"
