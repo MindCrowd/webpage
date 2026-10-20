@@ -1,9 +1,10 @@
 # MINDCROWD project website
 
-A responsive website for **MINDCROWD**, the behavior-aware crowd simulation and management project for Unity, deployed with **GitHub Pages**. All site files are in `dist/`; there are no dependencies, installation steps, or build steps.
+A responsive website for **MINDCROWD**, the behavior-aware NPC and crowd simulation project for Unity, deployed with **GitHub Pages**. All site files are in `dist/`; there are no dependencies, installation steps, or build steps.
 
-**Live website:** https://bilkentsenior.github.io/webpage/  
-**Source repository:** https://github.com/bilkentsenior/webpage
+**Live website:** https://mindcrowd.github.io/webpage/
+
+**Source repository:** https://github.com/MindCrowd/webpage
 
 The website repository is public and GitHub Pages is configured to deploy through GitHub Actions. Pushing site changes to `main` republishes the page automatically.
 
@@ -14,9 +15,9 @@ Open **`dist/site.config.js`**. This is the main place to update:
 - Project name and short name. **MINDCROWD** is configured as the final project name (`isPlaceholder: false`).
 - Project-name pronunciation: set `project.pronunciation` to the written pronunciation. Optionally set `spokenName` and `pronunciationLanguage` for browser speech, or add a recording and set `pronunciationAudio` (for example, `assets/project-name.mp3`). The listening button appears only for a final project name with configured pronunciation and supported audio. Team member names have no pronunciation controls.
 - Team ID, optional website URL override, contact email, and last updated date. The live URL is detected automatically on GitHub Pages.
-- Main/plugin repository URL. The known `bilkentsenior/CrowdSandbox-Unity` repository is already linked separately.
-- Team names, student IDs, roles, emails, optional GitHub profiles, and optional photographs.
-- Academic advisors, report links, meeting minutes, slides, and demo links.
+- Main/plugin repository URL. The known `MindCrowd/CrowdSandbox-Unity` repository is already linked separately.
+- Team names, student IDs, roles, emails, optional GitHub profiles, individual logbook links, and optional photographs.
+- Academic advisors, CS491 deliverable links, meeting minutes, and demo links.
 
 Leave an unknown URL as `""`. The page will show an unavailable status instead of a broken button. No changes made in a browser are saved; edit and commit the source file to update the published site.
 
@@ -30,7 +31,7 @@ Edit `dist/index.html` for the main project description and sections, and `dist/
 ```js
 {
   title: "Meeting minutes 02",
-  category: "Meeting minutes", // "Reports", "Meeting minutes", or "Media"
+  category: "Meeting minutes", // "CS491 deliverables" or "Meeting minutes"
   description: "A short summary of the meeting.",
   date: "2026-10-23", // Example date; replace with the actual date
   format: "PDF",
@@ -39,7 +40,9 @@ Edit `dist/index.html` for the main project description and sections, and `dist/
 },
 ```
 
-For future documents, leave `url` empty and use `status: "To be added"`. The future report and media entries are editable suggestions, not a verified course deliverable list. Add anything else your course requires. External document and video URLs work too.
+For future documents, leave `url` empty and use `status: "To be added"`. The five CS491 placeholders follow the [course deliverables guidelines](https://www.cs.bilkent.edu.tr/~cs4912/current/CS491_deliverables.html): Logbook, Project Information Form, Project Specification Document, Analysis and Requirements Report, and Presentation and Demo. Meeting minutes are kept in a separate category. The linked guidelines page is labeled Fall 2024; no current-term deadlines are inferred from it. External document and video URLs work too.
+
+Each team member has an optional `logbook` URL in `team`. Set it to show a Logbook link on their team card; Google Docs access permissions remain controlled in Google Docs. Leave links empty until they are ready. The archive Logbook entry can link to a shared index of the individual journals when available.
 
 ## Preview locally
 
@@ -61,7 +64,7 @@ You can also open `dist/index.html` directly in a browser. A local HTTP server i
 
 ## Deploy on GitHub Pages
 
-The website repository is **[bilkentsenior/webpage](https://github.com/bilkentsenior/webpage)**. The site is independent of the plugin and sandbox repositories. Keep `dist/`, `scripts/`, and `.github/` at this repository's root; local `qa/` files are ignored.
+The website repository is **[MindCrowd/webpage](https://github.com/MindCrowd/webpage)**. The site is independent of the plugin and sandbox repositories. Keep `dist/`, `scripts/`, and `.github/` at this repository's root; local `qa/` files are ignored.
 
 1. Commit and push the website to the repository's `main` or `master` branch.
 2. Open **Settings → Pages → Build and deployment → Source**, and select **GitHub Actions**.
@@ -70,13 +73,15 @@ The website repository is **[bilkentsenior/webpage](https://github.com/bilkentse
 
 The workflow validates the site and uploads only `dist/`. GitHub Pages must be available for your repository and account plan, Actions must be enabled, and the branch must be permitted by the `github-pages` environment. For other branch names, update the `branches` list in `.github/workflows/pages.yml`.
 
-The expected project-site URL is **https://bilkentsenior.github.io/webpage/**. A successful Pages deployment is required before the URL serves the website.
+The expected project-site URL is **https://mindcrowd.github.io/webpage/**. A successful Pages deployment is required before the URL serves the website.
 
 Official references: [Creating a GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site) and [Using custom workflows with GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
-### When the organization name changes
+### Organization and repository links
 
-1. Rename the organization on GitHub when you are ready; no name change is needed now.
+The organization is now **MindCrowd**. This checkout uses `https://github.com/MindCrowd/webpage.git`, and the live site is `https://mindcrowd.github.io/webpage/`. If the organization is renamed again:
+
+1. Rename the organization on GitHub.
 2. Open the repository under its new organization and rerun the Pages deployment. Check **Settings → Pages** for the new published address, normally `https://NEW-ORGANIZATION.github.io/webpage/`.
 3. Update the local remote using `git remote set-url origin https://github.com/NEW-ORGANIZATION/webpage.git`.
 4. Update `github.organization` in `dist/site.config.js` for local previews. On a hosted `github.io` site, the current organization is detected automatically, so the website-source and sandbox links follow the new owner without further page edits. This assumes the sandbox remains in the same organization; use its `url` override if it moves elsewhere.
@@ -89,7 +94,7 @@ All site files and PDFs use relative paths. Leave `project.websiteUrl` empty for
 - The supplied 9 October 2026 meeting minutes are copied unchanged to `dist/documents/meeting-minutes-01-2026-10-09.pdf`.
 - Team names and academic guidance come from the supplied meeting minutes. **MINDCROWD** is the project name selected by the team. The overview reflects the team's selected feature list: simulation environments, resource points and pathfinding, emotions, perception, debug tools, and group behavior. Individual technical roles, team ID, and unknown URLs have not been invented.
 - The original meeting minutes PDF remains unchanged. The website uses an editable name independently.
-- The described features and evaluation are presented as planned work. The interactive hero previews cover resource visits and queues, alarm evacuation, and medieval squad formations. They are website concept models, independent of the Unity implementation; their counters describe only the preview state.
+- The website covers both individual NPC behavior and crowd simulation. The described features and evaluation are presented as planned work. The interactive hero previews cover resource visits and queues, alarm evacuation, and medieval squad formations. They are website concept models, independent of the Unity implementation; their counters describe only the preview state.
 - The meeting template's submission/email instructions are source-document content, not actions performed by the website.
 
 ## Structure

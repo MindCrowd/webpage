@@ -51,7 +51,7 @@
     const value = config.project[element.dataset.config];
     if (value) element.textContent = value;
   });
-  document.title = `${config.project.name} — Crowd Simulation for Unity`;
+  document.title = `${config.project.name} — NPC and Crowd Simulation for Unity`;
   $("#name-status").textContent = config.project.isPlaceholder ? "Final project name to be added." : config.project.fullTitle;
   $("#team-id").textContent = config.project.teamId || "To be assigned";
   if (config.project.lastUpdated) $("#updated-date").textContent = `Last updated ${dateLabel(config.project.lastUpdated)}`;
@@ -143,6 +143,11 @@
       const github = link(member.github, "GitHub", "member-github");
       github.setAttribute("aria-label", `${member.name} on GitHub (opens in a new tab)`);
       article.append(github);
+    }
+    if (safeUrl(member.logbook)) {
+      const logbook = link(member.logbook, "Logbook", "member-logbook");
+      logbook.setAttribute("aria-label", `${member.name}'s project logbook (opens in a new tab)`);
+      article.append(logbook);
     }
     $("#team-grid").append(article);
   });

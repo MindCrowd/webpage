@@ -39,7 +39,7 @@ for (const doc of config.documents) {
     if (!bytes.subarray(0,5).equals(Buffer.from("%PDF-"))) errors.push(`Not a PDF: ${doc.url}`);
   }
 }
-for (const member of config.team) { await checkUrl(member.github); await checkUrl(member.photo); }
+for (const member of config.team) { await checkUrl(member.github); await checkUrl(member.logbook); await checkUrl(member.photo); }
 for (const advisor of config.advisors) await checkUrl(advisor.url);
 await checkUrl(config.project.websiteUrl);
 await checkUrl(config.project.pronunciationAudio);
