@@ -1,0 +1,322 @@
+(() => {
+  "use strict";
+  const config = window.PROJECT_CONFIG;
+  if (!config) return;
+  // GitHub project sites change host when the organization is renamed.
+  // Keep local PDFs/assets relative; resolve sibling repositories from that host.
+  const pagesOrganization = window.location.hostname.match(/^([a-z\d-]+)\.github\.io$/i)?.[1];
+  const githubOrganization = pagesOrganization || config.github?.organization || "";
+  const repositoryUrl = (repository) => repository.url || (repository.repository && githubOrganization ? `https://github.com/${githubOrganization}/${repository.repository}` : "");
+  const websiteUrl = config.project.websiteUrl || (pagesOrganization ? new URL(".", window.location.href).href : "");
+  const $ = (selector) => document.querySelector(selector);
+  const create = (tag, className, content) => {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (content !== undefined) element.textContent = content;
+    return element;
+  };
+  const icon = (name) => {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "icon");
+    svg.setAttribute("aria-hidden", "true");
+    const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    use.setAttribute("href", `#i-${name}`);
+    svg.append(use);
+    return svg;
+  };
+  // Local assets stay relative so the site also works at /repository-name/.
+  const safeUrl = (value, allowMail = false) => {
+    if (typeof value !== "string" || !value.trim()) return "";
+    try {
+      const resolved = new URL(value, window.location.href);
+      if (["https:", "http:", "file:"].includes(resolved.protocol) || (allowMail && resolved.protocol === "mailto:")) return value;
+    } catch (_) { /* Leave malformed links unavailable. */ }
+    return "";
+  };
+  const link = (url, label, className = "text-link") => {
+    const anchor = create("a", className, label);
+    anchor.href = url;
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    anchor.append(icon("external"));
+    return anchor;
+  };
+  const dateLabel = (value) => {
+    if (!value) return "";
+    const date = new Date(`${value}T12:00:00`);
+    return Number.isNaN(date.getTime()) ? value : new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric" }).format(date);
+  };
+
+  document.querySelectorAll("[data-config]").forEach((element) => {
+    const value = config.project[element.dataset.config];
+    if (value) element.textContent = value;
+  });
+  document.title = `${config.project.name} — Crowd Simulation for Unity`;
+  $("#name-status").textContent = config.project.isPlaceholder ? "Final project name to be added." : config.project.fullTitle;
+  $("#team-id").textContent = config.project.teamId || "To be assigned";
+  $("#team-count").textContent = config.team.length;
+  if (config.project.lastUpdated) $("#updated-date").textContent = `Last updated ${dateLabel(config.project.lastUpdated)}`;
+  if (safeUrl(websiteUrl)) {
+    $("#website-link").textContent = websiteUrl;
+    $("#website-link").href = websiteUrl;
+    $("#website-link").hidden = false;
+    $("#website-pending").hidden = true;
+  }
+  if (githubOrganization && config.github?.websiteRepository) {
+    const source = $("#website-source");
+    source.href = `https://github.com/${githubOrganization}/${config.github.websiteRepository}`;
+    source.hidden = false;
+  }
+  if (config.project.contactEmail) {
+    const contact = $("#contact-link");
+    contact.href = `mailto:${config.project.contactEmail}`;
+    contact.hidden = false;
+  }
+
+  const pronunciation = $("#pronounce-button");
+  const audioUrl = safeUrl(config.project.pronunciationAudio);
+  if (config.project.pronunciation) $("#pronunciation-text").textContent = config.project.pronunciation;
+  if (!config.project.isPlaceholder && (audioUrl || config.project.pronunciation || config.project.spokenName)) {
+    pronunciation.hidden = !(audioUrl || "speechSynthesis" in window);
+    let nameAudio;
+    pronunciation.addEventListener("click", async () => {
+      try {
+        if (audioUrl) {
+          nameAudio ||= new Audio(audioUrl);
+          nameAudio.currentTime = 0;
+          await nameAudio.play();
+        } else {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(config.project.spokenName || config.project.name);
+          utterance.lang = "en-US";
+          utterance.rate = 0.85;
+          window.speechSynthesis.speak(utterance);
+        }
+        $("#speech-status").textContent = `Playing pronunciation of ${config.project.name}.`;
+      } catch (_) {
+        $("#speech-status").textContent = "Audio could not play. The written pronunciation is shown above.";
+      }
+    });
+  }
+
+  config.team.forEach((member, index) => {
+    const article = create("article", "team-member");
+    const portrait = create("div", "member-portrait");
+    const names = member.name.trim().split(/\s+/);
+    const initials = names[0][0] + (names.length > 1 ? names[names.length - 1][0] : "");
+    portrait.append(create("span", "member-initials", initials), create("span", "member-index", `TEAM / ${String(index + 1).padStart(2, "0")}`));
+    portrait.setAttribute("aria-hidden", "true");
+    if (safeUrl(member.photo)) {
+      const photo = create("img", "member-photo");
+      photo.src = member.photo;
+      photo.alt = "";
+      photo.loading = "lazy";
+      photo.addEventListener("error", () => photo.remove(), { once: true });
+      portrait.append(photo);
+    }
+    article.append(portrait, create("h3", "", member.name), create("p", "member-role", member.role || "Project team"));
+    if (member.email) {
+      const email = create("a", "member-email", "Email ↗");
+      email.href = `mailto:${member.email}`;
+      email.setAttribute("aria-label", `Email ${member.name}`);
+      article.append(email);
+    }
+    if (safeUrl(member.github)) {
+      const github = link(member.github, "GitHub", "member-github");
+      github.setAttribute("aria-label", `${member.name} on GitHub (opens in a new tab)`);
+      article.append(github);
+    }
+    $("#team-grid").append(article);
+  });
+  config.advisors.forEach((advisor) => {
+    const item = create("div", "advisor");
+    item.append(safeUrl(advisor.url) ? link(advisor.url, advisor.name, "advisor-name") : create("p", "advisor-name", advisor.name), create("p", "advisor-role", advisor.role));
+    $("#advisor-list").append(item);
+  });
+
+  let activeFilter = "All";
+  const renderDocuments = () => {
+    const search = $("#document-search").value.trim().toLocaleLowerCase();
+    const documents = config.documents.filter((doc) => (activeFilter === "All" || doc.category === activeFilter) && `${doc.title} ${doc.category} ${doc.description} ${doc.date} ${doc.status}`.toLocaleLowerCase().includes(search));
+    const fragment = document.createDocumentFragment();
+    documents.forEach((doc) => {
+      const url = safeUrl(doc.url);
+      const row = create("article", `document-row${url ? "" : " pending"}`);
+      const fileIcon = create("div", "document-file-icon");
+      fileIcon.append(icon("file"));
+      const details = create("div", "document-details");
+      const title = create(url ? "a" : "h3", "document-title", doc.title);
+      if (url) {
+        title.href = url;
+        title.target = "_blank";
+        title.rel = "noopener noreferrer";
+        title.setAttribute("aria-label", `${doc.title} (opens in a new tab)`);
+      }
+      const meta = create("div", "document-meta");
+      meta.append(create("span", "category", doc.category), create("span", "", "/"), create("span", "", doc.format));
+      if (doc.date) {
+        const time = create("time", "", dateLabel(doc.date));
+        time.dateTime = doc.date;
+        meta.append(create("span", "", "/"), time);
+      }
+      details.append(title, create("p", "document-description", doc.description), meta);
+      const date = create("div", "document-date", dateLabel(doc.date) || "Undated");
+      if (!url) date.textContent = "Upcoming";
+      const action = create("div", "document-action");
+      if (url) {
+        const open = link(url, doc.format.startsWith("PDF") ? "Open PDF" : "Open resource");
+        open.setAttribute("aria-label", `Open ${doc.title} (opens in a new tab)`);
+        action.append(open);
+      } else action.append(create("span", "pending-badge", doc.status || "To be added"));
+      row.append(fileIcon, details, date, action);
+      fragment.append(row);
+    });
+    $("#document-list").replaceChildren(fragment);
+    $("#empty-documents").hidden = documents.length > 0;
+    $("#document-count").textContent = `${documents.length} document${documents.length === 1 ? "" : "s"} shown.`;
+  };
+  document.querySelectorAll(".filter").forEach((button) => button.addEventListener("click", () => {
+    activeFilter = button.dataset.filter;
+    document.querySelectorAll(".filter").forEach((item) => {
+      const active = item === button;
+      item.classList.toggle("active", active);
+      item.setAttribute("aria-pressed", String(active));
+    });
+    renderDocuments();
+  }));
+  $("#document-search").addEventListener("input", renderDocuments);
+  renderDocuments();
+
+  config.repositories.forEach((repository) => {
+    const article = create("article", "repo-card");
+    const header = create("div", "repo-card-header");
+    header.append(icon("github"), create("span", "", repository.tag));
+    article.append(header, create("h3", "", repository.name), create("p", "", repository.description));
+    if (safeUrl(repositoryUrl(repository))) article.append(link(repositoryUrl(repository), repository.label || "View on GitHub"));
+    else article.append(create("span", "pending-badge", "Repository link to be added"));
+    $("#repo-grid").append(article);
+  });
+  if (safeUrl(config.demo.url)) $("#demo-action").replaceChildren(link(config.demo.url, config.demo.label, "button"));
+
+  const menu = $(".menu-toggle");
+  const navigation = $("#navigation");
+  const closeMenu = () => {
+    menu.setAttribute("aria-expanded", "false");
+    navigation.classList.remove("open");
+  };
+  menu.addEventListener("click", () => {
+    const open = menu.getAttribute("aria-expanded") !== "true";
+    menu.setAttribute("aria-expanded", String(open));
+    navigation.classList.toggle("open", open);
+  });
+  navigation.querySelectorAll("a").forEach((anchor) => anchor.addEventListener("click", closeMenu));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && navigation.classList.contains("open")) { closeMenu(); menu.focus(); }
+  });
+
+  // Decorative, deterministic route animation; it does not simulate the plugin.
+  const canvas = $("#crowd-canvas");
+  const context = canvas.getContext("2d");
+  if (!context) { $("#motion-toggle").hidden = true; return; }
+  const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const motionButton = $("#motion-toggle");
+  let paused = motionPreference.matches;
+  let visible = true;
+  let frame = null;
+  let lastTime = null;
+  let elapsed = 0;
+  let width = 500;
+  let height = 337;
+  const routes = [ [[45,280],[65,240],[65,70],[310,70],[310,50]], [[45,280],[90,280],[310,280],[310,90],[310,50]] ];
+  const pointOnRoute = (route, progress) => {
+    const lengths = route.slice(1).map((point, i) => Math.hypot(point[0]-route[i][0], point[1]-route[i][1]));
+    let distance = progress * lengths.reduce((a, b) => a + b, 0);
+    for (let i = 0; i < lengths.length; i++) {
+      if (distance <= lengths[i]) {
+        const ratio = distance / lengths[i];
+        return [route[i][0]+(route[i+1][0]-route[i][0])*ratio, route[i][1]+(route[i+1][1]-route[i][1])*ratio];
+      }
+      distance -= lengths[i];
+    }
+    return route[route.length - 1];
+  };
+  const iso = (x, y, z = 0) => [250 + (x-y)*0.65, 20+(x+y)*0.39-z];
+  const polygon = (points, fill, stroke) => {
+    context.beginPath();
+    points.forEach((point, i) => i ? context.lineTo(...point) : context.moveTo(...point));
+    context.closePath();
+    if (fill) { context.fillStyle = fill; context.fill(); }
+    if (stroke) { context.strokeStyle = stroke; context.stroke(); }
+  };
+  const tile = (x,y,w,h,fill,stroke) => polygon([iso(x,y),iso(x+w,y),iso(x+w,y+h),iso(x,y+h)],fill,stroke);
+  const block = (x,y,w,h,z) => {
+    polygon([iso(x,y+h),iso(x+w,y+h),iso(x+w,y+h,z),iso(x,y+h,z)],"#455149","#627166");
+    polygon([iso(x+w,y),iso(x+w,y+h),iso(x+w,y+h,z),iso(x+w,y,z)],"#35413a","#627166");
+    polygon([iso(x,y,z),iso(x+w,y,z),iso(x+w,y+h,z),iso(x,y+h,z)],"#566157","#788271");
+  };
+  const draw = () => {
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    context.setTransform(pixelRatio,0,0,pixelRatio,0,0);
+    context.clearRect(0,0,width,height);
+    const scale = Math.min(width/500,height/337);
+    context.translate((width-500*scale)/2,(height-337*scale)/2+8);
+    context.scale(scale,scale);
+    context.lineWidth = .6;
+    for (let x=10;x<500;x+=18) for (let y=10;y<330;y+=18) {
+      context.fillStyle="#455148";context.fillRect(x,y,.7,.7);
+    }
+    tile(0,0,360,350,"#303e35","#697666");
+    context.strokeStyle="#455344";
+    for(let i=25;i<350;i+=25){context.beginPath();context.moveTo(...iso(i,0));context.lineTo(...iso(i,350));context.stroke();context.beginPath();context.moveTo(...iso(0,i));context.lineTo(...iso(360,i));context.stroke();}
+    tile(20,250,65,65,"#4c5843","#9caa77");
+    tile(280,20,65,65,"#68744d","#c1cd89");
+    routes.forEach((route)=>{context.beginPath();route.forEach((point,i)=>i?context.lineTo(...iso(...point)):context.moveTo(...iso(...point)));context.setLineDash([3,5]);context.strokeStyle="#acb88b";context.lineWidth=1;context.stroke();context.setLineDash([]);});
+    block(0,0,360,5,15);block(355,5,5,345,15);block(110,120,120,100,29);block(25,125,12,75,12);block(150,310,75,10,12);
+    // Landmark in the center of the shared resource area.
+    const center=iso(170,170,29);context.fillStyle="#a2ad8e";context.font="8px Consolas,monospace";context.textAlign="center";context.fillText("RESOURCE",center[0],center[1]+3);
+    const dots=[];
+    for(let i=0;i<62;i++){
+      const progress=(i/62+elapsed*(.018+(i%5)*.001))%1;
+      const [x,y]=pointOnRoute(routes[i%2],progress);
+      const offset=(i%5-2)*3.2;
+      dots.push({x:x+offset,y:y+offset,id:i});
+    }
+    dots.sort((a,b)=>(a.x+a.y)-(b.x+b.y));
+    dots.forEach((agent)=>{
+      const [x,y]=iso(agent.x,agent.y);
+      context.fillStyle="#12251c66";context.beginPath();context.ellipse(x+2,y+2,4.5,2,0,0,Math.PI*2);context.fill();
+      context.fillStyle=agent.id%7===0?"#d6dfbe":"#f18b59";context.beginPath();context.ellipse(x,y-2.5,2.3,3.3,0,0,Math.PI*2);context.fill();
+      context.fillStyle=agent.id%7===0?"#eef1d9":"#ffbc86";context.beginPath();context.arc(x,y-6,1.7,0,Math.PI*2);context.fill();
+    });
+    context.textAlign="left";context.font="7px Consolas,monospace";context.fillStyle="#9bac96";context.fillText("NAVIGATION + BEHAVIOR",16,319);
+    context.textAlign="right";context.fillText("ILLUSTRATIVE VIEW",480,319);
+  };
+  const tick = (time) => {
+    frame = null;
+    if (lastTime !== null) elapsed += Math.min((time-lastTime)/1000,.05);
+    lastTime = time;
+    draw();
+    if (!paused && visible && !document.hidden) frame = requestAnimationFrame(tick);
+  };
+  const syncMotion = () => {
+    if(frame !== null) cancelAnimationFrame(frame);
+    frame=null;lastTime=null;
+    motionButton.textContent = paused ? "Play animation ▷" : "Pause animation Ⅱ";
+    motionButton.setAttribute("aria-pressed",String(paused));
+    draw();
+    if(!paused && visible && !document.hidden) frame=requestAnimationFrame(tick);
+  };
+  const resize = () => {
+    const bounds=canvas.getBoundingClientRect();
+    width=bounds.width;height=bounds.height;
+    const ratio=Math.min(window.devicePixelRatio||1,2);
+    canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);
+    draw();
+  };
+  motionButton.addEventListener("click",()=>{paused=!paused;syncMotion();});
+  motionPreference.addEventListener("change",event=>{paused=event.matches;syncMotion();});
+  document.addEventListener("visibilitychange",syncMotion);
+  new ResizeObserver(resize).observe(canvas);
+  new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;syncMotion();}).observe(canvas);
+  resize();syncMotion();
+})();
