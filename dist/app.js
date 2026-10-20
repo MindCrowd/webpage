@@ -89,6 +89,7 @@
       portrait.append(photo);
     }
     article.append(portrait, create("h3", "", member.name), create("p", "member-role", member.role || "Project team"));
+    if (member.studentId) article.append(create("p", "member-student-id", `Student ID: ${member.studentId}`));
     if (member.email) {
       const email = create("a", "member-email", "Email ↗");
       email.href = `mailto:${member.email}`;

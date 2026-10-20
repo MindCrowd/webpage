@@ -14,7 +14,7 @@ Open **`dist/site.config.js`**. This is the main place to update:
 - Project name and short name; set `isPlaceholder` to `false` when the name is final.
 - Team ID, optional website URL override, contact email, and last updated date. The live URL is detected automatically on GitHub Pages.
 - Main/plugin repository URL. The known `bilkentsenior/CrowdSandbox-Unity` repository is already linked separately.
-- Team names, roles, emails, optional GitHub profiles, and optional photographs.
+- Team names, student IDs, roles, emails, optional GitHub profiles, and optional photographs.
 - Academic advisors, report links, meeting minutes, slides, and demo links.
 
 Leave an unknown URL as `""`. The page will show an unavailable status instead of a broken button. No changes made in a browser are saved; edit and commit the source file to update the published site.

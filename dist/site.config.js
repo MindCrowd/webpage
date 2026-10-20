@@ -37,11 +37,11 @@ window.PROJECT_CONFIG = {
     }
   ],
   team: [
-    { name: "Ata Eren Kılıç", email: "erenkilic@ug.bilkent.edu.tr", role: "Project team", github: "", photo: "" },
-    { name: "Başar Çubukçuoğlu", email: "basar.cubukcuoglu@ug.bilkent.edu.tr", role: "Project team", github: "", photo: "" },
-    { name: "Emir Atlas", email: "emir.atlas@ug.bilkent.edu.tr", role: "Project team", github: "", photo: "" },
-    { name: "Muhammed Emir Eren", email: "emir.eren@ug.bilkent.edu.tr", role: "Project team", github: "", photo: "" },
-    { name: "Yunus Emre Erkan", email: "emre.erkan@ug.bilkent.edu.tr", role: "Project team", github: "", photo: "" }
+    { name: "Ata Eren Kılıç", studentId: "22202801", email: "erenkilic@ug.bilkent.edu.tr", role: "Project team", github: "", photo: "" },
+    { name: "Başar Çubukçuoğlu", studentId: "22203359", email: "basar.cubukcuoglu@ug.bilkent.edu.tr", role: "Project team", github: "", photo: "" },
+    { name: "Emir Atlas", studentId: "22203455", email: "emir.atlas@ug.bilkent.edu.tr", role: "Project team", github: "", photo: "" },
+    { name: "Muhammed Emir Eren", studentId: "22202664", email: "emir.eren@ug.bilkent.edu.tr", role: "Project team", github: "", photo: "" },
+    { name: "Yunus Emre Erkan", studentId: "22203670", email: "emre.erkan@ug.bilkent.edu.tr", role: "Project team", github: "", photo: "" }
   ],
   advisors: [
     { name: "Prof. Uğur Güdükbay", role: "Project supervisor", url: "" },
