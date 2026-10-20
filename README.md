@@ -84,11 +84,11 @@ All site files and PDFs use relative paths. Leave `project.websiteUrl` empty for
 
 ## Included material and content boundaries
 
-- The supplied project proposal is copied unchanged to `dist/documents/project-proposal.pdf`.
+- The supplied unofficial project description is used as background information for the page and is not published as a report.
 - The supplied 9 October 2026 meeting minutes are copied unchanged to `dist/documents/meeting-minutes-01-2026-10-09.pdf`.
 - Team names, academic guidance, and project scope come from those supplied documents. Individual technical roles, final project name, team ID, and unknown URLs have not been invented.
-- Existing proposal/minutes titles remain unchanged inside their PDFs. The website uses an editable name independently.
-- The proposal's features and evaluation are presented as planned work. The moving diagram is clearly labeled as an illustration, not a running Unity implementation or a measured result.
+- The original meeting minutes PDF remains unchanged. The website uses an editable name independently.
+- The described features and evaluation are presented as planned work. The moving diagram is clearly labeled as an illustration, not a running Unity implementation or a measured result.
 - The meeting template's submission/email instructions are source-document content, not actions performed by the website.
 
 ## Structure

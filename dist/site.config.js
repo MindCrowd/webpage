@@ -50,15 +50,6 @@ window.PROJECT_CONFIG = {
   ],
   documents: [
     {
-      title: "Project proposal",
-      category: "Reports",
-      description: "Project idea, scope, planned functionality, and evaluation approach.",
-      date: "", // The supplied proposal has no date
-      format: "PDF · 2 pages",
-      url: "documents/project-proposal.pdf",
-      status: "Available"
-    },
-    {
       title: "Meeting minutes 01",
       category: "Meeting minutes",
       description: "Initial project discussion, supervisor, scope, and potential use cases.",
