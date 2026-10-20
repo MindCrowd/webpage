@@ -50,6 +50,7 @@ window.PROJECT_CONFIG = {
   ],
   advisors: [
     { name: "Prof. Uğur Güdükbay", role: "Project supervisor", url: "" },
+    { name: "Cem Çimenbiçer", role: "Innovation Expert", url: "" },
     { name: "Mert Bıçakçı", role: "Course instructor", url: "" },
     { name: "Hüseyin Açacak", role: "Course instructor", url: "" }
   ],
