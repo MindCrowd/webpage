@@ -2,6 +2,11 @@
 
 A responsive project website prepared for **GitHub Pages**. The editable placeholder **Project Name** is intentional. All site files are in `dist/`; there are no dependencies, installation steps, or build steps.
 
+**Live website:** https://bilkentsenior.github.io/webpage/  
+**Source repository:** https://github.com/bilkentsenior/webpage
+
+The website repository is public and GitHub Pages is configured to deploy through GitHub Actions. Pushing site changes to `main` republishes the page automatically.
+
 ## Edit the website
 
 Open **`dist/site.config.js`**. This is the main place to update:
