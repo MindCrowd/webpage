@@ -86,7 +86,7 @@ All site files and PDFs use relative paths. Leave `project.websiteUrl` empty for
 
 - The supplied unofficial project description is used as background information for the page and is not published as a report.
 - The supplied 9 October 2026 meeting minutes are copied unchanged to `dist/documents/meeting-minutes-01-2026-10-09.pdf`.
-- Team names, academic guidance, and project scope come from those supplied documents. Individual technical roles, final project name, team ID, and unknown URLs have not been invented.
+- Team names and academic guidance come from the supplied meeting minutes. The overview reflects the team's selected feature list: simulation environments, resource points and pathfinding, emotions, perception, debug tools, and group behavior. Individual technical roles, final project name, team ID, and unknown URLs have not been invented.
 - The original meeting minutes PDF remains unchanged. The website uses an editable name independently.
 - The described features and evaluation are presented as planned work. The moving diagram is clearly labeled as an illustration, not a running Unity implementation or a measured result.
 - The meeting template's submission/email instructions are source-document content, not actions performed by the website.

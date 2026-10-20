@@ -57,16 +57,41 @@
 
     <section class="section container" id="overview" aria-labelledby="overview-title">
       <div class="section-top"><span class="section-index">01 / THE PROJECT</span><span class="section-note">A system of connected decisions</span></div>
-      <div class="overview-intro"><h2 id="overview-title">Beyond getting<br>from A to B.</h2><div class="overview-body"><p class="lead">Real crowds do more than follow paths. They wait, react, form groups, and adapt to the people around them.</p><p>We are developing a modular Unity package that adds these layers to existing NavMesh navigation. Our aim is to make agent decisions configurable and explainable, while studying how individual behavior changes the crowd as a whole.</p></div></div>
+      <div class="overview-intro"><h2 id="overview-title">Beyond getting<br>from A to B.</h2><div class="overview-body"><p class="lead">Real crowds do more than follow paths. They wait, react, form groups, and adapt to the people around them.</p><p>Our selected features bring together specialized crowd pathfinding, emotion-driven decisions, perception, and group movement in a modular Unity package. Different 3D simulation environments will let us test these capabilities, supported by debug tools and small language models (SLMs).</p></div></div>
       <div class="module-grid">
-        <article class="module"><span class="module-number">01</span><h3>Crowd-aware navigation</h3><p>Route preferences that consider density, bottlenecks, and alternatives to the shortest path.</p><span class="module-tag">NAVIGATION</span></article>
-        <article class="module"><span class="module-number">02</span><h3>Resources &amp; queues</h3><p>Capacity-aware destinations, shared resources, waiting times, and coordinated demand.</p><span class="module-tag">COORDINATION</span></article>
-        <article class="module"><span class="module-number">03</span><h3>Perception &amp; reactions</h3><p>Configurable perception of nearby characters, objects, and events that influence decisions.</p><span class="module-tag">PERCEPTION</span></article>
-        <article class="module"><span class="module-number">04</span><h3>States &amp; emotions</h3><p>Traits and behavior states that affect speed, patience, goals, and controlled emotional influence.</p><span class="module-tag">BEHAVIOR</span></article>
-        <article class="module"><span class="module-number">05</span><h3>Social groups</h3><p>Shared destinations, leaders, and cohesion rules for agents that move and regroup together.</p><span class="module-tag">SOCIAL SYSTEMS</span></article>
-        <article class="module"><span class="module-number">06</span><h3>Tools &amp; evaluation</h3><p>Debug views and repeatable scenarios to compare travel times, waiting, congestion, and frame time.</p><span class="module-tag">OBSERVABILITY</span></article>
+        <article class="module">
+          <span class="module-number">01</span><h3>3D simulation environments</h3>
+          <p>Different environments to test the system's capabilities:</p>
+          <ul class="module-features"><li>Evacuation simulation</li><li>Crowd simulation</li><li>Medieval War Field</li></ul>
+          <span class="module-tag">SIMULATION ENVIRONMENTS</span>
+        </article>
+        <article class="module">
+          <span class="module-number">02</span><h3>Resource points &amp; pathfinding</h3>
+          <ul class="module-features"><li>Crowd pathfinding with a specialized NavMesh</li><li>Developer-selectable queue formation at waiting points</li><li>Templates for points of interest and NPC gathering points</li><li>Points of avoidance</li></ul>
+          <span class="module-tag">NAVIGATION &amp; RESOURCES</span>
+        </article>
+        <article class="module">
+          <span class="module-number">03</span><h3>Emotion-driven behavior</h3>
+          <ul class="module-features"><li>Emotion templates and character-based behavior</li><li>Event-based feedback</li><li>SLM decisions for state transitions</li></ul>
+          <span class="module-tag">EMOTIONS &amp; DECISIONS</span>
+        </article>
+        <article class="module">
+          <span class="module-number">04</span><h3>Perception</h3>
+          <ul class="module-features"><li>Configurable agent field of view</li><li>Detection of nearby NPCs, objects, and points of interest</li><li>Awareness of nearby events: fights, hazards, panic, and blocked paths</li></ul>
+          <span class="module-tag">PERCEPTION &amp; AWARENESS</span>
+        </article>
+        <article class="module">
+          <span class="module-number">05</span><h3>Debug tools &amp; benchmarking</h3>
+          <ul class="module-features"><li>Congestion reporting and benchmarking for resource points</li><li>Logging of utilization, turnaround time, and average time spent</li><li>SLM congestion detection from logs</li></ul>
+          <span class="module-tag">DEBUGGING &amp; ANALYSIS</span>
+        </article>
+        <article class="module">
+          <span class="module-number">06</span><h3>Group movement &amp; behavior</h3>
+          <ul class="module-features"><li>Making and preserving formations</li><li>Adapting formations to obstacles</li><li>Emotion diffusion that influences others in the crowd, especially within groups</li></ul>
+          <span class="module-tag">FORMATIONS &amp; GROUPS</span>
+        </article>
       </div>
-      <div class="scope-note"><span class="scope-label">PLANNED SCOPE</span><p>These modules describe the planned scope, with implementation and evaluation still to come. Optional LLM experiments are an extension after the core systems are functional.</p></div>
+      <div class="scope-note"><span class="scope-label">SELECTED SCOPE</span><p>These are the selected features for the project. Implementation details and evaluation results will be documented as development progresses.</p></div>
       <div class="identity-panel"><div><span class="section-index">THE NAME BEHIND THE PROJECT</span><h3 data-config="name">Project Name</h3><p id="name-status">Final project name to be added.</p></div><div class="project-meta"><span class="fact-label">TEAM ID</span><p id="team-id">To be assigned</p><span class="fact-label">PROJECT WEB PAGE</span><a id="website-link" class="subtle-link" hidden></a><p id="website-pending">URL to be added after deployment</p></div></div>
     </section>
 
