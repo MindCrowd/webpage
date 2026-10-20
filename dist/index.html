@@ -7,9 +7,11 @@
   <meta name="description" content="MINDCROWD, a Bilkent University senior design project exploring behavior-aware crowd simulation and management for Unity. Meet the team, read reports, and explore the repositories.">
   <title>MINDCROWD — Crowd Simulation for Unity</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=5e7aae7b0f">
   <script src="site.config.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="app.js?v=6f1a6d8b99" defer></script>
+  <script src="simulation-model.js?v=7c107c6664" defer></script>
+  <script src="simulation.js?v=626850e6a9" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -45,12 +47,15 @@
         <div class="hero-footnote"><span class="line"></span> <span data-config="course">CS491/492 · Senior Design Project</span></div>
       </div>
       <div class="simulation-panel">
-        <div class="simulation-header"><span><span class="live-dot"></span> THE CROWD, CONNECTED</span><span class="mono">CONCEPT / 01</span></div>
-        <div class="canvas-wrap"><canvas id="crowd-canvas" role="img" aria-label="Illustrative top-down crowd diagram. Dots move through two corridors toward a shared destination. This is a website illustration, not the Unity plugin."></canvas>
-          <span class="map-label spawn-label">SPAWN ZONE</span><span class="map-label destination-label">SHARED GOAL <span aria-hidden="true">↗</span></span>
-        </div>
-        <div class="simulation-controls"><div class="legend"><span class="agent-key"></span> Agents <span class="route-key"></span> Routes</div><button id="motion-toggle" type="button" aria-pressed="false">Pause animation <span aria-hidden="true">Ⅱ</span></button></div>
-        <p class="simulation-caption"><span class="small-dot"></span> An illustrative concept. Unity demonstration to follow.</p>
+        <div class="simulation-header"><span><span class="live-dot"></span> MINDCROWD IN MOTION</span><span class="mono" id="scenario-code">01 / 03</span></div>
+        <div class="scenario-switcher" role="group" aria-label="Choose a simulation concept"><button type="button" data-scenario="resources" class="active" aria-pressed="true">Resource hall</button><button type="button" data-scenario="evacuation" aria-pressed="false">Evacuation</button><button type="button" data-scenario="medieval" aria-pressed="false">Medieval field</button></div>
+        <div class="canvas-wrap"><canvas id="crowd-canvas" role="img" aria-describedby="scenario-description" aria-label="Interactive resource hall concept: visitors choose resources, queue, use them, and leave. This website preview is independent of the Unity implementation."></canvas></div>
+        <div class="preview-metrics" aria-label="Preview state"><div><span id="preview-label-0">In queues</span><strong id="preview-value-0">0</strong></div><div><span id="preview-label-1">Using resources</span><strong id="preview-value-1">0</strong></div><div><span id="preview-label-2">Visits finished</span><strong id="preview-value-2">0</strong></div></div>
+        <p class="scenario-description" id="scenario-description">Visitors reserve a place, queue, use a kiosk or rest point, and leave. Close the kiosk to change their destination choices.</p>
+        <div class="simulation-controls"><button id="scenario-action" type="button">Close kiosk</button><button id="scenario-reset" type="button">Reset</button><button id="motion-toggle" type="button" aria-pressed="false" aria-label="Pause simulation preview">Pause Ⅱ</button></div>
+        <p class="scenario-legend" id="scenario-legend">Approach → queue → use → leave</p>
+        <p class="simulation-caption"><span class="small-dot"></span> Interactive website concept · Unity implementation in development.</p>
+        <p class="sr-only" id="scenario-message" role="status" aria-live="polite"></p>
       </div>
     </section>
 

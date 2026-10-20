@@ -5,6 +5,6 @@
   "description": "MINDCROWD: Bilkent crowd simulation senior project website for GitHub Pages",
   "scripts": {
     "start": "node scripts/serve.mjs",
-    "check": "node scripts/validate.mjs"
+    "check": "node scripts/validate.mjs && node scripts/check-simulation.mjs"
   }
 }

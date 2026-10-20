@@ -44,6 +44,6 @@ for (const advisor of config.advisors) await checkUrl(advisor.url);
 await checkUrl(config.project.websiteUrl);
 await checkUrl(config.project.pronunciationAudio);
 await checkUrl(config.demo.url);
-new vm.Script(await readFile(resolve(root,"app.js"),"utf8"));
+for (const script of ["app.js", "simulation-model.js", "simulation.js"]) new vm.Script(await readFile(resolve(root,script),"utf8"));
 if (errors.length) { console.error(errors.join("\n")); process.exitCode=1; }
 else console.log(`Website checks passed: ${config.team.length} team members, ${config.documents.length} archive entries, all local files and anchors present.`);

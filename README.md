@@ -89,7 +89,7 @@ All site files and PDFs use relative paths. Leave `project.websiteUrl` empty for
 - The supplied 9 October 2026 meeting minutes are copied unchanged to `dist/documents/meeting-minutes-01-2026-10-09.pdf`.
 - Team names and academic guidance come from the supplied meeting minutes. **MINDCROWD** is the project name selected by the team. The overview reflects the team's selected feature list: simulation environments, resource points and pathfinding, emotions, perception, debug tools, and group behavior. Individual technical roles, team ID, and unknown URLs have not been invented.
 - The original meeting minutes PDF remains unchanged. The website uses an editable name independently.
-- The described features and evaluation are presented as planned work. The moving diagram is clearly labeled as an illustration, not a running Unity implementation or a measured result.
+- The described features and evaluation are presented as planned work. The interactive hero previews cover resource visits and queues, alarm evacuation, and medieval squad formations. They are website concept models, independent of the Unity implementation; their counters describe only the preview state.
 - The meeting template's submission/email instructions are source-document content, not actions performed by the website.
 
 ## Structure
@@ -99,10 +99,13 @@ All site files and PDFs use relative paths. Leave `project.websiteUrl` empty for
 dist/
   index.html                 Main page and project description
   styles.css                 Responsive design
-  app.js                     Archive, team rendering, and illustration
+  app.js                     Archive, project identity, and team rendering
+  simulation-model.js        Independent website scenario logic
+  simulation.js              Isometric scenario rendering and controls
   site.config.js             Editable project data and links
   assets/favicon.svg         Local icon (add photos here)
   documents/                 Included and future project files
 scripts/serve.mjs             Local static preview
 scripts/validate.mjs          Local file and link validation
+scripts/check-simulation.mjs  Scenario behavior checks
 ```

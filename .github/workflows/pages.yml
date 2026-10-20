@@ -6,6 +6,7 @@ on:
     paths:
       - 'dist/**'
       - 'scripts/validate.mjs'
+      - 'scripts/check-simulation.mjs'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -33,6 +34,8 @@ jobs:
           node-version: '22'
       - name: Check website files and links
         run: node scripts/validate.mjs
+      - name: Check interactive simulation behavior
+        run: node scripts/check-simulation.mjs
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload website
