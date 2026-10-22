@@ -92,6 +92,7 @@ All site files and PDFs use relative paths. Leave `project.websiteUrl` empty for
 
 - The supplied unofficial project description is used as background information for the page and is not published as a report.
 - The supplied 9 October 2026 meeting minutes are copied unchanged to `dist/documents/meeting-minutes-01-2026-10-09.pdf`.
+- The supplied Project Information Form dated 20 October 2026 is available unchanged as `dist/documents/project-information-form-2026-10-20.docx`.
 - Team names and academic guidance come from the supplied meeting minutes. **MINDCROWD** is the project name selected by the team. The overview reflects the team's selected feature list: simulation environments, resource points and pathfinding, emotions, perception, debug tools, and group behavior. Individual technical roles, team ID, and unknown URLs have not been invented.
 - The original meeting minutes PDF remains unchanged. The website uses an editable name independently.
 - The website covers both individual NPC behavior and crowd simulation. The described features and evaluation are presented as planned work. The interactive hero previews cover resource visits and queues, alarm evacuation, and medieval squad formations. They are website concept models, independent of the Unity implementation; their counters describe only the preview state.

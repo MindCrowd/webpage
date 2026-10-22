@@ -187,7 +187,7 @@
       if (!url) date.textContent = "Upcoming";
       const action = create("div", "document-action");
       if (url) {
-        const open = link(url, doc.format.startsWith("PDF") ? "Open PDF" : "Open resource");
+        const open = link(url, doc.label || (doc.format.startsWith("PDF") ? "Open PDF" : "Open resource"));
         open.setAttribute("aria-label", `Open ${doc.title} (opens in a new tab)`);
         action.append(open);
       } else action.append(create("span", "pending-badge", doc.status || "To be added"));

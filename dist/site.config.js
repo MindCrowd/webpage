@@ -17,7 +17,7 @@ window.PROJECT_CONFIG = {
     year: "2026",
     websiteUrl: "", // Detected automatically on GitHub Pages; optional custom URL override
     contactEmail: "", // Optional team contact address
-    lastUpdated: "2026-10-20"
+    lastUpdated: "2026-10-22"
   },
   github: {
     organization: "MindCrowd", // Local preview fallback; hosted GitHub Pages detects the current owner
@@ -57,7 +57,7 @@ window.PROJECT_CONFIG = {
   documents: [
     // CS491 deliverables: https://www.cs.bilkent.edu.tr/~cs4912/current/CS491_deliverables.html
     { title: "Logbook", category: "CS491 deliverables", description: "Personal CS491/492 progress journals for each team member.", date: "", format: "Online journals", url: "", status: "To be added" },
-    { title: "Project Information Form", category: "CS491 deliverables", description: "Project identity, summary, academic guidance, and website address.", date: "", format: "Document", url: "", status: "To be added" },
+    { title: "Project Information Form", category: "CS491 deliverables", description: "Project identity, summary, academic guidance, and website address.", date: "2026-10-20", format: "DOCX", url: "documents/project-information-form-2026-10-20.docx", label: "Download DOCX", status: "Available" },
     { title: "Project Specification Document", category: "CS491 deliverables", description: "Project scope, requirements, constraints, standards, and professional responsibilities.", date: "", format: "PDF", url: "", status: "To be added" },
     { title: "Analysis and Requirements Report", category: "CS491 deliverables", description: "System analysis and requirements, project plan, risks, teamwork, and learning strategy.", date: "", format: "PDF", url: "", status: "To be added" },
     { title: "Presentation and Demo", category: "CS491 deliverables", description: "First-semester progress presentation and demonstration of the project.", date: "", format: "Slides / demo", url: "", status: "To be added" },
